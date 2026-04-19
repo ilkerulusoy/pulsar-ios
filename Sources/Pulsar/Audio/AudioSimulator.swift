@@ -10,11 +10,7 @@ public class AudioSimulator: NSObject {
 	private var filterNode: AVAudioUnitEQ = AVAudioUnitEQ(numberOfBands: 1)
 	private var isInitialized = false
 	private var isEngineConfigured = false
- #if DEBUG
-  private var playSound: Bool = true
-#else
-  private var playSound: Bool = false
-#endif
+	private var playSound: Bool = true
 
 	public override init() {
 		super.init()
@@ -45,7 +41,7 @@ public class AudioSimulator: NSObject {
 
     let session = AVAudioSession.sharedInstance()
 		do {
-			try session.setCategory(.playback, mode: .default, options: [.mixWithOthers])
+			try session.setCategory(.ambient, mode: .default, options: [.mixWithOthers])
 			try session.setActive(true)
 		} catch {
 			print("AudioSession error: \(error)")
